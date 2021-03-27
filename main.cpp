@@ -1,19 +1,35 @@
 #include<iostream>
 #include<fstream>
 #include<stack>
+#include<vector>
+#include<algorithm>
 
 #include"./include/item.hpp"
 #include"./include/knapsack-problem.hpp"
 
+bool compare_cost_benefit(KnapsackProblem::Item* a, KnapsackProblem::Item* b){
+    return a->cost_benefit() < b->cost_benefit();
+}
+
 std::stack<KnapsackProblem::Item*> read_input(std::ifstream &input, int n){
-    std::stack<KnapsackProblem::Item*> items;
+    std::vector<KnapsackProblem::Item*> item_vector;
+    std::stack<KnapsackProblem::Item*> item_stack;
     int v, w;
 
     for(int i = 0; (i < n && input >> v >> w); i++){
-        items.push(new KnapsackProblem::Item(i, v, w));
+        item_vector.push_back(new KnapsackProblem::Item(i, v, w));
     }
 
-    return items;
+    std::sort(item_vector.begin(), item_vector.end(), compare_cost_benefit);
+    // std::cout << "[";
+    for(std::vector<KnapsackProblem::Item*>::iterator it = item_vector.begin(); it != item_vector.end(); ++it){
+        KnapsackProblem::Item* item = *it;
+        // std::cout << item->cost_benefit() << ", ";
+        item_stack.push(item);
+    }
+    // std::cout << "\b\b]\n";
+
+    return item_stack;
 }
 
 int main(int argc, char const *argv[]){
@@ -27,7 +43,8 @@ int main(int argc, char const *argv[]){
     input >> n >> w_max;
     std::stack<KnapsackProblem::Item*> items = read_input(input, n);
 
-    KnapsackProblem::backtracking(items, w_max);
+    KnapsackProblem::backtracking_solve(items, w_max);
+    KnapsackProblem::breach_and_bound_solve(items, w_max);
 
     while(!items.empty()){
         KnapsackProblem::Item* item = items.top();

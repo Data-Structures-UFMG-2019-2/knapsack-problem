@@ -1,6 +1,8 @@
 #ifndef KNAPSACK_H
 #define KNAPSACK_H
 
+#include"./item.hpp"
+
 namespace KnapsackProblem {
     class Knapsack {
         private:
@@ -14,6 +16,8 @@ namespace KnapsackProblem {
             int get_weight();
             int get_value();
             int get_capacity();
+            double best_case(Item* item);
+            bool valid();
     };
 }
 

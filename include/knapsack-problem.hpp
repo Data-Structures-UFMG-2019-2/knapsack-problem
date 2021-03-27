@@ -7,8 +7,8 @@
 
 namespace KnapsackProblem {
     
-    void backtracking(std::stack<Item*> items, int w_max);
-    void breach_and_bound(std::stack<Item*> items, int w_max);
+    void backtracking_solve(std::stack<Item*> items, int w_max);
+    void breach_and_bound_solve(std::stack<Item*> items, int w_max);
 
 };
 

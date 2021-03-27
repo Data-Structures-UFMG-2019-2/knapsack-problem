@@ -22,4 +22,8 @@ namespace KnapsackProblem {
         return this->weight;
     }
 
+    double Item::cost_benefit(){
+        return (double)((double)this->value/(double)this->weight);
+    }
+
 }

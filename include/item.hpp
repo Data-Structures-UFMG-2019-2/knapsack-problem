@@ -14,6 +14,7 @@ namespace KnapsackProblem {
             int get_id();
             int get_value();
             int get_weight();
+            double cost_benefit();
     };
 }
 

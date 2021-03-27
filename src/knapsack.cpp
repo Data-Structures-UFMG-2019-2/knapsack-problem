@@ -22,5 +22,12 @@ namespace KnapsackProblem {
         return this->capacity;
     }
 
+    double Knapsack::best_case(Item* item){
+        return ((double)(this->capacity - this->weight) * item->cost_benefit()) + (double)(this->value);
+    }
+
+    bool Knapsack::valid(){
+        return this->weight <= this->capacity;
+    }
 
 }
