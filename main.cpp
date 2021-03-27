@@ -3,18 +3,14 @@
 #include<stack>
 
 #include"./include/item.hpp"
+#include"./include/knapsack-problem.hpp"
 
-std::stack<Item*> read_input(char const* input_path){
-    std::ifstream input(input_path);
-    std::stack<Item*> items;
+std::stack<KnapsackProblem::Item*> read_input(std::ifstream &input, int n){
+    std::stack<KnapsackProblem::Item*> items;
+    int v, w;
 
-    int n, w_max;
-
-    if(input >> n >> w_max){
-        int v, w;
-        for(int i = 0; (i < n && input >> v >> w); i++){
-            items.push(new Item(i, v, w));
-        }
+    for(int i = 0; (i < n && input >> v >> w); i++){
+        items.push(new KnapsackProblem::Item(i, v, w));
     }
 
     return items;
@@ -26,10 +22,15 @@ int main(int argc, char const *argv[]){
         return 1;
     }
 
-    std::stack<Item*> items = read_input(argv[1]);
+    std::ifstream input(argv[1]);
+    int n, w_max;
+    input >> n >> w_max;
+    std::stack<KnapsackProblem::Item*> items = read_input(input, n);
+
+    KnapsackProblem::backtracking(items, w_max);
 
     while(!items.empty()){
-        Item* item = items.top();
+        KnapsackProblem::Item* item = items.top();
         items.pop();
         delete item;
     }

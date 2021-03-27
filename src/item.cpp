@@ -1,21 +1,25 @@
 #include"../include/item.hpp"
 
-Item::Item(int id, int value, int weight){
-    this->id = id;
-    this->value = value;
-    this->weight = weight;
-}
+namespace KnapsackProblem {
 
-Item::~Item(){}
+    Item::Item(int id, int value, int weight){
+        this->id = id;
+        this->value = value;
+        this->weight = weight;
+    }
 
-int Item::get_id(){
-    return this->id;
-}
+    Item::~Item(){}
 
-int Item::get_value(){
-    return this->value;
-}
+    int Item::get_id(){
+        return this->id;
+    }
 
-int Item::get_weight(){
-    return this->weight;
+    int Item::get_value(){
+        return this->value;
+    }
+
+    int Item::get_weight(){
+        return this->weight;
+    }
+
 }

@@ -1,12 +1,26 @@
 #include"../include/knapsack.hpp"
-#include<vector>
 
-Knapsack::Knapsack(std::vector<Item*> items, int weight, int value){
-    this->items = items;
-    this->weight = weight;
-    this->value = value;
+namespace KnapsackProblem {
+
+    Knapsack::Knapsack(int weight, int value, int capacity){
+        this->weight = weight;
+        this->value = value;
+        this->capacity = capacity;
+    }
+
+    Knapsack::~Knapsack(){}
+
+    int Knapsack::get_weight(){
+        return this->weight;
+    }
+
+    int Knapsack::get_value(){
+        return this->value;
+    }
+
+    int Knapsack::get_capacity(){
+        return this->capacity;
+    }
+
+
 }
-
-Knapsack::Knapsack(){}
-
-Knapsack::~Knapsack(){}
