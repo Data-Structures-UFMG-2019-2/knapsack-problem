@@ -28,7 +28,7 @@ std::string test_name(char const* path){
 std::stack<KnapsackProblem::Item*> read_input(std::ifstream &input, int n){
     std::vector<KnapsackProblem::Item*> item_vector;
     std::stack<KnapsackProblem::Item*> item_stack;
-    int v, w;
+    double v, w;
 
     for(int i = 0; (i < n && input >> v >> w); i++){
         item_vector.push_back(new KnapsackProblem::Item(i, v, w));
@@ -53,13 +53,13 @@ int main(int argc, char const *argv[]){
     }
 
     std::ofstream output(OUTPUT_PATH);
-    output << "Teste; Aluno; Backtracking; Breach and bound; Solução";
+    output << "Teste; Aluno; Backtracking time (us); Breach and bound time (us); Solução";
 
     for(int i = 1; i < argc; i++){
         std::ifstream input(argv[i]);
         if(!input.is_open()) continue;
         int n, w_max, backtracking_time, bnb_time;
-        float backtracking_solution, bnb_solution;
+        double backtracking_solution, bnb_solution;
         input >> n >> w_max;
         std::stack<KnapsackProblem::Item*> items = read_input(input, n);
         input.close();

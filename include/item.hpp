@@ -5,16 +5,16 @@ namespace KnapsackProblem {
     class Item {
         private:
             int id;
-            float value;
-            float weight;
+            double value;
+            double weight;
 
         public:
-            Item(int id, float vaule, float weight);
+            Item(int id, double vaule, double weight);
             ~Item();
             int get_id();
-            float get_value();
-            float get_weight();
-            float cost_benefit();
+            double get_value();
+            double get_weight();
+            double cost_benefit();
     };
 }
 
