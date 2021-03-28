@@ -17,11 +17,10 @@ namespace KnapsackProblem {
 
         Item* next_item = items.top();
         items.pop();
-        int with_weight = (knapsack->get_weight() + next_item->get_weight());
-        int with_value = (knapsack->get_value() + next_item->get_value());
+        float with_weight = knapsack->get_weight() + next_item->get_weight();
+        float with_value = knapsack->get_value() + next_item->get_value();
         Knapsack* with_knapsack = new Knapsack(with_weight, with_value, w_max);
         delete knapsack;
-        
 
         if(with_knapsack->get_weight() <= w_max){
             Knapsack* with_result = backtracking(with_knapsack, items, w_max);
@@ -43,7 +42,7 @@ namespace KnapsackProblem {
         }
     }
 
-    Knapsack* breach_and_bound(Knapsack* knapsack, std::stack<Item*> items, int w_max, int best_value){
+    Knapsack* breach_and_bound(Knapsack* knapsack, std::stack<Item*> items, int w_max, float best_value){
         if(items.empty()){
             return knapsack;
         }
@@ -52,8 +51,8 @@ namespace KnapsackProblem {
         Knapsack* wout_knapsack = new Knapsack(knapsack->get_weight(), knapsack->get_value(), w_max);
         Item* next_item = items.top();
         items.pop();
-        int with_weight = (knapsack->get_weight() + next_item->get_weight());
-        int with_value = (knapsack->get_value() + next_item->get_value());
+        float with_weight = (knapsack->get_weight() + next_item->get_weight());
+        float with_value = (knapsack->get_value() + next_item->get_value());
         Knapsack* with_knapsack = new Knapsack(with_weight, with_value, w_max);
 
         if(items.empty()){
@@ -121,17 +120,21 @@ namespace KnapsackProblem {
         return best_result;
     }
     
-    void backtracking_solve(std::stack<Item*> items, int w_max){
-        Knapsack* result = backtracking(new Knapsack(0, 0, w_max), items, w_max);
-        std::cout << "Reached optimal value " << result->get_value() << " with weight " << result->get_weight() << "\n";
-        delete result; 
+    float backtracking_solve(std::stack<Item*> items, int w_max){
+        Knapsack* result = backtracking(new Knapsack(0.0, 0.0, w_max), items, w_max);
+        // std::cout << "Reached optimal value " << result->get_value() << " with weight " << result->get_weight() << "\n";
+        float solution = result->get_value();
+        delete result;
+        return solution;
     }
 
-    void breach_and_bound_solve(std::stack<Item*> items, int w_max){
-        Knapsack* result = new Knapsack(0, 0, w_max);
-        result = breach_and_bound(result, items, w_max, 0);
-        std::cout << "Reached optimal value " << result->get_value() << " with weight " << result->get_weight() << "\n";
+    float breach_and_bound_solve(std::stack<Item*> items, int w_max){
+        Knapsack* result = new Knapsack(0.0, 0.0, w_max);
+        result = breach_and_bound(result, items, w_max, 0.0);
+        // std::cout << "Reached optimal value " << result->get_value() << " with weight " << result->get_weight() << "\n";
+        float solution = result->get_value();
         delete result;
+        return solution;
     }
 
 

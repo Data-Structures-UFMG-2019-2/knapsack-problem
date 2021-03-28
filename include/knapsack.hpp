@@ -6,17 +6,17 @@
 namespace KnapsackProblem {
     class Knapsack {
         private:
-            int weight = 0;
-            int value = 0;
+            float weight = 0.0;
+            float value = 0.0;
             int capacity;
         public:
-            Knapsack(int weight, int value, int capacity);
+            Knapsack(float weight, float value, int capacity);
             ~Knapsack();
 
-            int get_weight();
-            int get_value();
+            float get_weight();
+            float get_value();
             int get_capacity();
-            double best_case(Item* item);
+            float best_case(Item* item);
             bool valid();
     };
 }

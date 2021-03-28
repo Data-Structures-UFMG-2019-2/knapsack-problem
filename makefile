@@ -7,6 +7,9 @@ BUILD_PATH=./build
 SOURCE_PATH=./src
 LIB_PATH=./include
 
+INPUT_PATH=./input
+INPUT := $(shell find $(INPUT_PATH) -type f -path '*')
+
 SOURCE_EXT := cpp
 SOURCES := $(shell find $(SOURCE_PATH) -path '*.$(SOURCE_EXT)')
 OBJECTS := $(patsubst $(SOURCE_PATH)/%,$(BUILD_PATH)/%,$(SOURCES:.$(SOURCE_EXT)=.o))
@@ -24,7 +27,7 @@ clean:
 	rm -rf $(BUILD_PATH)/*
 
 run:
-	$(TARGET_PATH) -c ./input/seed -b > ./output/crawler.log
+	$(TARGET_PATH) $(INPUT)
 	
 mem:
-	valgrind --leak-check=full --show-leak-kinds=all --log-file="./output/mem.log" --max-threads=100 $(TARGET_PATH) ./input/f1_l-d_kp_10_269
+	valgrind --leak-check=full --show-leak-kinds=all --log-file="./output/mem.log" --max-threads=100 $(TARGET_PATH) $(INPUT)

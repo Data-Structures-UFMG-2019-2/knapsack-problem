@@ -2,7 +2,7 @@
 
 namespace KnapsackProblem {
 
-    Knapsack::Knapsack(int weight, int value, int capacity){
+    Knapsack::Knapsack(float weight, float value, int capacity){
         this->weight = weight;
         this->value = value;
         this->capacity = capacity;
@@ -10,11 +10,11 @@ namespace KnapsackProblem {
 
     Knapsack::~Knapsack(){}
 
-    int Knapsack::get_weight(){
+    float Knapsack::get_weight(){
         return this->weight;
     }
 
-    int Knapsack::get_value(){
+    float Knapsack::get_value(){
         return this->value;
     }
 
@@ -22,8 +22,8 @@ namespace KnapsackProblem {
         return this->capacity;
     }
 
-    double Knapsack::best_case(Item* item){
-        return ((double)(this->capacity - this->weight) * item->cost_benefit()) + (double)(this->value);
+    float Knapsack::best_case(Item* item){
+        return ((this->capacity - this->weight) * item->cost_benefit()) + this->value;
     }
 
     bool Knapsack::valid(){

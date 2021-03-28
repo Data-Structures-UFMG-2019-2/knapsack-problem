@@ -2,7 +2,7 @@
 
 namespace KnapsackProblem {
 
-    Item::Item(int id, int value, int weight){
+    Item::Item(int id, float value, float weight){
         this->id = id;
         this->value = value;
         this->weight = weight;
@@ -14,16 +14,16 @@ namespace KnapsackProblem {
         return this->id;
     }
 
-    int Item::get_value(){
+    float Item::get_value(){
         return this->value;
     }
 
-    int Item::get_weight(){
+    float Item::get_weight(){
         return this->weight;
     }
 
-    double Item::cost_benefit(){
-        return (double)((double)this->value/(double)this->weight);
+    float Item::cost_benefit(){
+        return this->value / this->weight;
     }
 
 }
