@@ -8,6 +8,17 @@
 
 namespace KnapsackProblem {
 
+    /**
+     * Recursive call to backtracking solution. 
+     * Evaluates whether is valid to include the next item on the backpack, 
+     * if so, calculates the solution for both branches, otherwise, calculates 
+     * only the solution for the "without" branch.
+     * 
+     * @param knapsack the knapsack state prior to this branch
+     * @param items the items that are still to be included or not in the solution
+     * @param w_max the maximum capacity of the knapsack
+     * @return the optimal knapsack result for the branch
+     */
     Knapsack* backtracking(Knapsack* knapsack, std::stack<Item*> items, int w_max){
         Knapsack* wout_knapsack = new Knapsack(knapsack->get_weight(), knapsack->get_value(), w_max);
         if(items.empty()){
@@ -42,6 +53,18 @@ namespace KnapsackProblem {
         }
     }
 
+    /**
+     * Recursive call to branch and bound solution. 
+     * Evaluates whether is worth to calculate the branch considering the optimal 
+     * solution obtained so far and the best cases for the child branches. 
+     * Then, calcultes only the branches that are both valid and worth.
+     * 
+     * @param knapsack the knapsack state prior to this branch
+     * @param items the items that are still to be included or not in the solution
+     * @param w_max the maximum capacity of the knapsack
+     * @param best_value the best value obtained so far
+     * @return the optimal knapsack result for the branch
+     */
     Knapsack* breach_and_bound(Knapsack* knapsack, std::stack<Item*> items, int w_max, double best_value){
         if(items.empty()){
             return knapsack;
@@ -119,7 +142,14 @@ namespace KnapsackProblem {
 
         return best_result;
     }
-    
+
+    /**
+     * Backtracking solution for the knapsack problem
+     * 
+     * @param items the items to be included or not in the solution
+     * @param w_max the maximum capacity of the knapsack
+     * @return the optimal knapsack result (maximum in value)
+     */
     double backtracking_solve(std::stack<Item*> items, int w_max){
         Knapsack* result = backtracking(new Knapsack(0.0, 0.0, w_max), items, w_max);
         // std::cout << "Reached optimal value " << result->get_value() << " with weight " << result->get_weight() << "\n";
@@ -128,6 +158,13 @@ namespace KnapsackProblem {
         return solution;
     }
 
+    /**
+     * Branch and bound solution for the knapsack problem
+     * 
+     * @param items the items to be included or not in the solution
+     * @param w_max the maximum capacity of the knapsack
+     * @return the optimal knapsack result (maximum in value)
+     */
     double breach_and_bound_solve(std::stack<Item*> items, int w_max){
         Knapsack* result = new Knapsack(0.0, 0.0, w_max);
         result = breach_and_bound(result, items, w_max, 0.0);
